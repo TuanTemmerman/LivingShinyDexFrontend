@@ -8,13 +8,13 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterOutlet, CommonModule],
   templateUrl: './pokemon-list.component.html',
-  styleUrl: './pokemon-list.component.css'
+  styleUrls: ['./pokemon-list.component.css']
 })
 export class PokemonListComponent implements OnInit {
   pokemonList: any[] = [];
   isLoading = true;
 
-  constructor(private pokemonService: PokemonService){}
+  constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
     this.pokemonService.getAllPokemonImages().subscribe(data => {
@@ -24,11 +24,8 @@ export class PokemonListComponent implements OnInit {
   }
 
   addShiny(pokemon: any): void {
-    this.pokemonService.addShinyPokemon(pokemon.name, pokemon.id).subscribe(response => {
+    this.pokemonService.addShinyPokemon(pokemon.name, pokemon.id).subscribe(() => {
       alert(`${pokemon.name} added to shinyowned!`);
-      
-      // Update the cache in PokemonMyListComponent after adding new shiny
-      this.pokemonService.refreshShinyPokemonCache().subscribe();
     });
   }
 }
