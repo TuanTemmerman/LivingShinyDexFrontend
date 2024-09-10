@@ -1,0 +1,17 @@
+<div *ngIf="isLoading">Loading Pokémon images...</div>
+
+<div *ngIf="!isLoading && pokemonList.length > 0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 col-sm-4 col-xs-6" *ngFor="let pokemon of pokemonList">
+        <div class="card mb-4" style="width: 100%; height: 350px;"> <!-- Limit the card height -->
+          <img class="card-img-top" [src]="pokemon.image" [alt]="pokemon.name" style="height: 150px; object-fit: cover;"> <!-- Fix image height -->
+          <div class="card-body d-flex flex-column">
+            <h2 class="card-title" style="font-size: 1.25rem;">{{ pokemon.name | titlecase }}</h2> <!-- Smaller font size -->
+            <button class="btn btn-primary mt-auto" (click)="addShiny(pokemon)" style="font-size: 0.875rem;">Add to Shiny Owned</button> <!-- Smaller button text -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
