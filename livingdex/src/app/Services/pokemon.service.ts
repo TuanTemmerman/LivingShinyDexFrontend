@@ -14,25 +14,25 @@ export class PokemonService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPokemonImages(): Observable<any[]> {
-    const cachedData = localStorage.getItem('pokemonData');
-    if (cachedData) {
-      return of(JSON.parse(cachedData));
-    }
+  getNationalDex(): Observable<any[]> {
 
-    const requests = Array.from({ length: 1025 }, (_, i) => this.http.get(`${this.apiUrl}/${i + 1}`));
+    return this.http.get<any[]>('http://localhost:3000/nationaldex').pipe(
 
-    return forkJoin(requests).pipe(
-      map((responses: any[]) =>
-        responses.map((pokemon: any) => ({
-          name: pokemon.name,
-          image: pokemon.sprites.other.home.front_shiny,
-          id: pokemon.id
-        }))
-      ),
-      tap(pokemonData => localStorage.setItem('pokemonData', JSON.stringify(pokemonData)))
+      switchMap(nationalDex => {
+        const requests = nationalDex.map(pokemon =>
+          this.http.get(`${this.apiUrl}/${pokemon.id}`).pipe(
+            map((pokeApiData: any) => ({
+              ...pokemon, 
+              image: pokeApiData.sprites.other.home.front_shiny 
+            }))
+          )
+        );
+        return forkJoin(requests); 
+      }),
+      tap(pokemonData => localStorage.setItem('nationalDexWithImages', JSON.stringify(pokemonData)))
     );
   }
+  
 
   addShinyPokemon(name: string, dexnumber: number): Observable<any> {
     return this.http.post<any>(this.postUrl, { name, dexnumber }).pipe(

@@ -17,7 +17,7 @@ export class PokemonListComponent implements OnInit {
   constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
-    this.pokemonService.getAllPokemonImages().subscribe(data => {
+    this.pokemonService.getNationalDex().subscribe(data => {
       this.pokemonList = data;
       this.isLoading = false;
     });
@@ -25,6 +25,7 @@ export class PokemonListComponent implements OnInit {
 
   addShiny(pokemon: any): void {
     this.pokemonService.addShinyPokemon(pokemon.name, pokemon.id).subscribe(() => {
+      pokemon.shiny = true;
       alert(`${pokemon.name} added to shinyowned!`);
     });
   }
