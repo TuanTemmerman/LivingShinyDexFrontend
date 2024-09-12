@@ -11,6 +11,9 @@ export class PokemonService {
   private postUrl = 'http://localhost:3000/add-shiny';
   private shinyListUrl = 'http://localhost:3000/my-shiny-list';
   private deleteUrl = 'http://localhost:3000/delete-shiny';
+  private totalShinyPercentageUrl= 'http://localhost:3000/shiny-percentage';
+  private shinyPercentageByGenUrl = 'http://localhost:3000/shiny-percentage-by-gen';
+  private recentShinyUrl = 'http://localhost:3000/recent-shiny';
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +34,7 @@ export class PokemonService {
       }),
       tap(pokemonData => localStorage.setItem('nationalDexWithImages', JSON.stringify(pokemonData)))
     );
-  }
-  
+  }  
 
   addShinyPokemon(name: string, dexnumber: number): Observable<any> {
     return this.http.post<any>(this.postUrl, { name, dexnumber }).pipe(
@@ -74,6 +76,37 @@ export class PokemonService {
             ...data
           })))
         );
+      })
+    );
+  }
+
+  getTotalShinyPercentage(): Observable<number> {
+    return this.http.get<any>(this.totalShinyPercentageUrl).pipe(
+      map(response => response.shiny_percentage)
+    );
+  }
+
+  getShinyPercentageByGen(): Observable<any[]> {
+    return this.http.get<any[]>(this.shinyPercentageByGenUrl).pipe(
+      map(response => response.map(gen => ({  
+        gen: gen.gen,
+        shiny_percentage: gen.shiny_percentage
+      })))
+    );
+  }
+  
+  getRecentShinyPokemon(): Observable<any[]> {
+    return this.http.get<any[]>(this.recentShinyUrl).pipe(
+      switchMap(recentShiny => {
+        const pokemonRequests = recentShiny.map(pokemon =>
+          this.http.get(`${this.apiUrl}/${pokemon.dexnumber}`).pipe(
+            map((pokeApiData: any) => ({
+              ...pokemon,
+              image: pokeApiData.sprites.other.home.front_shiny
+            }))
+          )
+        );
+        return forkJoin(pokemonRequests);
       })
     );
   }

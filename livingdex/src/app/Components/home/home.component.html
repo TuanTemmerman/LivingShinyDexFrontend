@@ -1,0 +1,19 @@
+<div>
+    <h1>Shiny Pokémon Statistics</h1>
+    <h2>Total Shiny Percentage: {{ totalShinyPercentage ? totalShinyPercentage.toFixed(2) : '0.00' }}%</h2>
+  
+    <div *ngFor="let gen of shinyPercentageByGen" class="mb-3">
+        <h3>{{ getRegionName(gen.gen) }}</h3>
+        <ngb-progressbar 
+          [value]="gen.shiny_percentage ? gen.shiny_percentage : 0" type="success" >
+          {{ gen.shiny_percentage ? gen.shiny_percentage.toFixed(2) : '0.00' }}%
+        </ngb-progressbar>
+    </div>
+
+      <<h2>Recently Added Shiny Pokémon</h2>
+      <div class="row">
+        <div class="col-md-2 col-sm-4 col-xs-6" *ngFor="let pokemon of recentShinyPokemon">
+          <img [src]="pokemon.image" [alt]="pokemon.name" style="height: 150px; width: auto; object-fit: cover;">
+        </div>
+      </div>
+</div>
