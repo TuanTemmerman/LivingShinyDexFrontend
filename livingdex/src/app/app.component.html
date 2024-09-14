@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<div class="d-flex">
+  <<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-sidebar">
+    <div class="container-fluid d-flex flex-column">
+      <ul class="navbar-nav flex-column me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
@@ -11,6 +12,9 @@
           <a class="nav-link" href="/mylist">My List</a>
         </li>
       </ul>
-  </div>
-</nav>
-<router-outlet />
+    </div>
+  </nav>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>  
+</div>

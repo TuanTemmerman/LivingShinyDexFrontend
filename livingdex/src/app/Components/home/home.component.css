@@ -1,0 +1,40 @@
+.parent {
+    display: flex;
+    align-items: center;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+  
+.child-10 {
+    width: 110px; 
+    padding-right: 10px; 
+    text-align: left; 
+}
+  
+.child-90 {
+    flex: 1; 
+}
+  
+.progressbar {
+    width: 100%; 
+}
+  
+h4 {
+    margin: 0;
+}
+
+h2 {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#content {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+  }
+  
+  #content .col-md-2 {
+    flex: 0 0 auto; 
+  }
+  
