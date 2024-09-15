@@ -3,3 +3,53 @@
     max-width: 12.5%;
   }
   
+.loading {
+  color: #ECBB4A;
+}
+
+h2 {
+  color: #ECBB4A;
+}
+
+hr {
+  color: #ECBB4A;
+}
+
+.card {
+  background-color: #222222;
+}
+
+.btn {
+  background-color: #ECBB4A;
+  color: black;
+  border-color: #ECBB4A !important; 
+}
+
+.btn:hover {
+  background-color: #a3802d;
+  border-color: #a3802d !important;
+}
+
+.alert-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050; 
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1050; 
+}
+
+.loading {
+  font-size: 1.5rem; 
+  color: #ECBB4A; 
+}

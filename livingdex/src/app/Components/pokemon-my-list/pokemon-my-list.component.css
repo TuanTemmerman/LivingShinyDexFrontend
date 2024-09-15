@@ -2,3 +2,18 @@
   flex: 0 0 12.5%;
   max-width: 12.5%;
 }
+
+.card {
+  background-color: #222222;
+}
+
+.btn {
+  background-color: #ECBB4A;
+  color: black;
+  border-color: #ECBB4A !important; 
+}
+
+.btn:hover {
+  background-color: #a3802d;
+  border-color: #a3802d !important;
+}
