@@ -1,31 +1,36 @@
-<div>
-  <div class="row">
-    <div class="col">  
-      <div *ngFor="let gen of shinyPercentageByGen" class="mb-3">
-        <div class="parent">
-          <div class="child-10">
-            <h4>{{ getRegionName(gen.gen) }}</h4>
+  <div>
+    <div class="row">
+      <div class="col" id="regions">  
+        <div *ngFor="let gen of shinyPercentageByGen" class="mb-3">
+          <div class="parent">
+            <div class="child-10">
+              <h4>{{ getRegionName(gen.gen) }}</h4>
+            </div>
+            <div class="child-90">
+              <div class="custom-progress-bar">
+                <div
+                  class="custom-progress-bar-fill"
+                  [ngStyle]="{ width: (gen.shiny_percentage ? gen.shiny_percentage : 0) + '%', backgroundColor: getRegionColor(gen.gen) }"
+                ></div>
+                <span class="progress-label">
+                  {{ gen.shiny_percentage ? gen.shiny_percentage.toFixed(2) : '0.00' }}%
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="child-90">
-            <ngb-progressbar class="progressbar" 
-              [value]="gen.shiny_percentage ? gen.shiny_percentage : 0" type="success">
-              {{ gen.shiny_percentage ? gen.shiny_percentage.toFixed(2) : '0.00' }}%
-            </ngb-progressbar>
-          </div>
+        </div>      
+      </div>
+      <div class="col" id="total">
+        <h4 id="totalpercentage">{{ totalShinyPercentage ? totalShinyPercentage.toFixed(2) : '0.00' }}%</h4>
+      </div>
+    </div>
+
+    <div>
+      <h2 id="recentshiniestitle">Recent Shinies</h2>
+      <div class="row" id="content">
+        <div class="col-md-2 col-sm-4 col-xs-6" *ngFor="let pokemon of recentShinyPokemon">
+          <img [src]="pokemon.image" [alt]="pokemon.name" style="height: 150px; width: auto; object-fit: cover;">
         </div>
       </div>
     </div>
-    <div class="col">
-      <h4>Total Shiny Percentage: {{ totalShinyPercentage ? totalShinyPercentage.toFixed(2) : '0.00' }}%</h4>
-    </div>
   </div>
-
-  <div>
-    <h2>Recently Added Shiny Pokémon</h2>
-    <div class="row" id="content">
-      <div class="col-md-2 col-sm-4 col-xs-6" *ngFor="let pokemon of recentShinyPokemon">
-        <img [src]="pokemon.image" [alt]="pokemon.name" style="height: 150px; width: auto; object-fit: cover;">
-      </div>
-    </div>
-  </div>
-</div>

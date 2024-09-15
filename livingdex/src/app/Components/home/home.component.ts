@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     '7': 'Alola',
     '8': 'Galar',
     '9': 'Paldea'
-  };
+  };  
 
   constructor(private pokemonService: PokemonService) {}
 
@@ -57,4 +57,19 @@ export class HomeComponent implements OnInit {
       this.recentShinyPokemon = data;
     });
   }
+
+  getRegionColor(gen: string): string {
+    const regionColorMap: { [key: string]: string } = {
+      '1': '#ff0000', // Kanto
+      '2': '#ff8800', // Johto
+      '3': '#00cc44', // Hoenn
+      '4': '#0099ff', // Sinnoh
+      '5': '#ff33cc', // Unova
+      '6': '#cc00cc', // Kalos
+      '7': '#66ccff', // Alola
+      '8': '#9933ff', // Galar
+      '9': '#ffcc00', // Paldea
+    };
+    return regionColorMap[gen] || '#ff0000';
+  }  
 }

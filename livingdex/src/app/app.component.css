@@ -1,28 +1,26 @@
-/* Sidebar styles */
 .fixed-sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 200px; /* Adjust width as needed */
+    width: 200px; 
     z-index: 1000;
-    overflow-y: auto; /* Allows scrolling in the sidebar if content overflows */
+    overflow-y: auto; 
     display: flex;
     flex-direction: column;
     align-items: start;
     padding-top: 1rem;
-  }
-  
-  /* Adjust main content to account for sidebar width */
+    background-color: #333333 !important;
+  }  
+
   .main-content {
-    margin-left: 200px; /* Same width as the sidebar */
+    margin-left: 200px; 
     padding: 1rem;
     width: 100%;
   }
-  
-  /* Optional: Style adjustments for the navbar items */
-  .navbar-nav .nav-link {
+
+    .navbar-nav .nav-link {
     padding: 0.5rem 1rem;
     font-size: 1.1rem;
+    color: #ECBB4A;
   }
-  
